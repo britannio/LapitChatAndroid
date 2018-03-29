@@ -20,6 +20,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/* TODO
+    -Check network state to ensure the user is connected to the internet
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;

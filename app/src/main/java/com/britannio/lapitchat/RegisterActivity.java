@@ -30,6 +30,7 @@ import es.dmoral.toasty.Toasty;
 public class RegisterActivity extends AppCompatActivity {
 
     private TextInputLayout mDisplayName;
+    private TextInputLayout mUsername;
     private TextInputLayout mEmail;
     private TextInputLayout mPassword;
     private Button mCreateBtn;
@@ -65,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Registration fields
         mDisplayName = findViewById(R.id.reg_display_name);
+        mUsername = findViewById(R.id.reg_username);
         mEmail = findViewById(R.id.reg_email);
         mPassword = findViewById(R.id.reg_password);
         mCreateBtn = findViewById(R.id.reg_create_btn);
@@ -75,18 +77,21 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String display_name = mDisplayName.getEditText().getText().toString();
+                String username = mUsername.getEditText().getText().toString();
                 String email = mEmail.getEditText().getText().toString();
                 String password = mPassword.getEditText().getText().toString();
 
-                if(!TextUtils.isEmpty(display_name) && !TextUtils.isEmpty(email) //tiny bit of validation
+                //tiny bit of validation
+                if(!TextUtils.isEmpty(display_name) && !TextUtils.isEmpty(email)
                         && !TextUtils.isEmpty(password)
+                        && !TextUtils.isEmpty(username)
                         && Patterns.EMAIL_ADDRESS.matcher(email).matches() ) {
 
                     mRegProgress.setTitle("Registering User");
                     mRegProgress.setMessage("Please wait while we create your account");
                     mRegProgress.setCanceledOnTouchOutside(false);
                     mRegProgress.show();
-                    register_user(display_name, email, password);
+                    register_user(display_name,username, email, password);
 
                 } else {
                     Toasty.error(getApplicationContext(), "Fill All Fields correctly", Toast.LENGTH_SHORT, true).show();
@@ -96,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register_user(final String display_name, String email, String password) {
+    private void register_user(final String display_name, final String username, String email, String password) {
 
         //Create user(email and password)
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -105,32 +110,41 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                            FirebaseUser current_user = mAuth.getCurrentUser();
                             //could check if current user is null but it isn't necessary here
                             String UID = current_user.getUid();
 
                             mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(UID);
 
                             HashMap<String, String> userMap = new HashMap<>();
-                            userMap.put("name", display_name);
+                            userMap.put("full_name", display_name);
+                            userMap.put("username", username);
                             userMap.put("status", "Hi there, I'm using Lapit Chat");
-                            userMap.put("name", display_name);
+                            userMap.put("image", "default");
+                            userMap.put("thumb_image", "default");
 
-                           /* // Sign in success, update UI with the signed-in user's information
-                            Log.d("AUTH", "createUserWithEmail:success");
+                            mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                            mRegProgress.dismiss();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                                    if (task.isSuccessful()) {
 
-                            //Go to the MainActivity
-                            Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        // Sign in success, update UI with the signed-in user's information
+                                        mRegProgress.dismiss();
 
-                            //prevents the user from going back to the start page once logged in
-                            //shouldn't be required since I have added the finish() call to the main activity.
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(mainIntent);
-                            finish(); //Prevents back button from sending user to the this activity
+                                        //Go to the MainActivity
+                                        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
 
+                                        //prevents the user from going back to the start page once logged in
+                                        //shouldn't be required since I have added the finish() call to the main activity.
+                                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(mainIntent);
+                                        finish(); //Prevents back button from sending user to the this activity
+
+                                    }
+
+                                }
+                            });
 
 
                         } else {
@@ -144,11 +158,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         }
-*/
+
                             // ...
-                        }
                     }
                 });
+
 
     }
 }
