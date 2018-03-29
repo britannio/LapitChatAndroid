@@ -20,6 +20,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.dmoral.toasty.Toasty;
+
 /* TODO
     -Check network state to ensure the user is connected to the internet
  */
@@ -103,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
             sendToStart();
 
+        } else {
+            getSupportActionBar().setTitle("Logged in ---");
+            //Toasty.info(getApplicationContext(), mAuth.get)
         }
     }
 
@@ -131,7 +136,12 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
 
+        } else if (item.getItemId() == R.id.main_settings_btn) {
+
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
+
 
         return true;
     }

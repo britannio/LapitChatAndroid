@@ -10,9 +10,10 @@
     <string name="create_a_new_account">Create a New Account</string>
     <string name="login_to_your_account">Login To Your Account</string>
     <string name="username">Username</string>
-    <string name="full_name">Full Name</string>
+    <string name="full_name">Loading...</string>
     <string name="status">Hi there, I\'m using Lapit Chat</string>
     <string name="change_image">CHANGE IMAGE</string>
     <string name="change_status">CHANGE STATUS</string>
+    <string name="atusername">\@loading...</string>
 
 </resources>
