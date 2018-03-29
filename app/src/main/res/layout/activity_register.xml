@@ -129,4 +129,15 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_create_btn"
+        app:srcCompat="@drawable/ordinary_day" />
+
 </android.support.constraint.ConstraintLayout>

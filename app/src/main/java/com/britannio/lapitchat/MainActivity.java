@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
 
         //add an icon to each tab
-        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_requests);
+        /*mTabLayout.getTabAt(0).setIcon(R.drawable.ic_requests);
         mTabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_friends);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_friends);*/
 
         //##########################################################################################
 
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
             sendToStart();
 
-        } else {
-            getSupportActionBar().setTitle("Logged in ---");
+        } else { // should display Lapit Chat - @username
+            getSupportActionBar().setTitle("Lapit Chat | @username");
             //Toasty.info(getApplicationContext(), mAuth.get)
         }
     }

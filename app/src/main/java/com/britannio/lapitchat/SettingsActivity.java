@@ -1,7 +1,10 @@
 package com.britannio.lapitchat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,11 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mStatus;
     private TextView mUsername;
 
+    private Button mStatusBtn;
+    private Button mImageBtn;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +50,8 @@ public class SettingsActivity extends AppCompatActivity {
         mStatus = findViewById(R.id.settings_status);
         mUsername = findViewById(R.id.settings_username);
 
+        mStatusBtn = findViewById(R.id.settings_status_btn);
+        mImageBtn = findViewById(R.id.settings_image_btn);
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -61,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 mFullName.setText(name);
                 mStatus.setText(status);
-                mUsername.setText(username);
+                mUsername.setText("@" + username);
 
             }
 
@@ -70,6 +80,30 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+
+        mStatusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent statusIntent = new Intent(SettingsActivity.this, StatusActivity.class);
+                statusIntent.putExtra("status_value", mStatus.getText().toString());
+                startActivity(statusIntent);
+            }
+        });
+
+        mImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent galleryIntent = new Intent();
+                galleryIntent.setType("image/*");
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+
+            }
+        });
+
+
+
 
     }
 }
