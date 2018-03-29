@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean networkConnected = false;
 
     private ViewPager mViewPager; //linked to the xml viewpager
-    private SectionsPagerAdapter mSectionsPagerAdapter; //necessary to make the tabs work???
 
     private TabLayout mTabLayout;
 
@@ -38,19 +37,34 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //Toolbar setup
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Lapit Chat");
 
 
-        //Tabs
+        //TabLayout and ViewPager SETUP ############################################################
+        //Adapter Setup for the viewPager
         mViewPager = findViewById(R.id.main_tabPager);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
         mTabLayout = findViewById(R.id.main_tabLayout);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        //Add Fragments
+        adapter.AddFragment(new RequestsFragment(), "REQUESTS");
+        adapter.AddFragment(new ChatsFragment(), "CHAT");
+        adapter.AddFragment(new FriendsFragment(), "FRIENDS");
+
+        //giving the viewPager all the fragments then giving the tabLayout it's tabs
+        mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        //add an icon to each tab
+        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_requests);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_friends);
+
+        //##########################################################################################
+
 
         /*AlertDialog.Builder  builder  = new AlertDialog.Builder(MainActivity.this);
         builder

@@ -20,8 +20,11 @@
             android:id="@+id/main_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/white"
-            app:tabIndicatorColor="@color/colorAccent"></android.support.design.widget.TabLayout>
+            app:tabMode="fixed"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
+            <!-- Dark theme gives us light text-->
+
+        </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
