@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Lapit Chat</string>
-    <string name="need_a_new_account">NEED A NEW ACCOUNT?</string>
-    <string name="display_name">Display Name</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="login">LOG IN</string>
+    <string name="display_name">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="login_account">Login</string>
+    <string name="create_a_new_account">Create a New Account</string>
+    <string name="login_to_your_account">Login To Your Account</string>
 
 </resources>
