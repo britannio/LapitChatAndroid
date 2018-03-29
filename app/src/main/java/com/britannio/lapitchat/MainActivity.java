@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar mToolbar;
     private boolean networkConnected = false;
 
+    private ViewPager mViewPager; //linked to the xml viewpager
+    private SectionsPagerAdapter mSectionsPagerAdapter; //necessary to make the tabs work???
+
+    private TabLayout mTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,34 +42,35 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Lapit Chat");
 
-        /*ConnectivityManager conMan = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = conMan.getActiveNetworkInfo();
-        Log.d("Connected state",networkInfo.getState().toString());
-        if(networkInfo.isConnected()){
-            Log.d("Connected",networkInfo.toString());
-            networkConnected = true;
 
-        } else {
+        //Tabs
+        mViewPager = findViewById(R.id.main_tabPager);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-*//*
-            AlertDialog.Builder  builder  = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage("Lapit Chat cannot connect to the internet. Please check your network settings and retry ").setTitle("Network Error").setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-                }
-            }).setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        mTabLayout = findViewById(R.id.main_tabLayout);
+        mTabLayout.setupWithViewPager(mViewPager);
 
-                }
-            });
+        /*AlertDialog.Builder  builder  = new AlertDialog.Builder(MainActivity.this);
+        builder
+                .setMessage("Lapit Chat cannot connect to the internet. Please check your network settings and retry ")
+                .setTitle("Network Error")
+                .setCancelable(false)
+                .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-*//*
+            }
+        }).setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        }*/
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();*/
 
 
     }

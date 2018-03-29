@@ -99,6 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             //go to the main activity
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                            //prevents the user from going back to the start page once logged in
+                            //shouldn't be required since I have added the finish() call to the main activity.
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
 

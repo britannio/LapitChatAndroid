@@ -105,6 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                             //Go to the MainActivity
                             Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+
+                            //prevents the user from going back to the start page once logged in
+                            //shouldn't be required since I have added the finish() call to the main activity.
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(mainIntent);
                             finish(); //Prevents back button from sending user to the this activity
 

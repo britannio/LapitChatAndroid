@@ -4,19 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.britannio.lapitchat.MainActivity">
+    tools:context="com.britannio.lapitchat.MainActivity"
+    >
 
-    <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <include
+            android:id="@+id/main_page_toolbar"
+            layout="@layout/app_bar_layout" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/white"
+            app:tabIndicatorColor="@color/colorAccent"></android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--Place to display tab fragments-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_tabPager"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is the main page"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"></android.support.v4.view.ViewPager>
+    
 
+    
 </android.support.constraint.ConstraintLayout>

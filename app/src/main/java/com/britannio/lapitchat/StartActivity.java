@@ -18,6 +18,26 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+/*        AlertDialog.Builder  builder  = new AlertDialog.Builder(StartActivity.this);
+        builder
+                .setMessage("Lapit Chat cannot connect to the internet. Please check your network settings and retry ")
+                .setTitle("Network Error")
+                .setCancelable(false)
+                .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();*/
+
         mRegButton = findViewById(R.id.start_reg_btn);
 
         mRegButton.setOnClickListener(new View.OnClickListener() {
@@ -44,21 +64,6 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        /*AlertDialog.Builder  builder  = new AlertDialog.Builder(StartActivity.this);
-        builder.setMessage("Lapit Chat cannot connect to the internet. Please check your network settings and retry ").setTitle("Network Error").setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        }).setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();*/
 
     }
 }
